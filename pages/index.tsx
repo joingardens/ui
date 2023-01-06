@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button, { ButtonVariants, LowLevelButtonProps, VariantsToProps } from '../components/button/button'
+import { Theme, Themes } from '../config/theme.config'
 
 
 export default function Home() {
@@ -11,6 +12,19 @@ export default function Home() {
     disabled: false,
     className: ""
   })
+  const [themeState, setThemeState] = useState<Theme["themeName"]>("default")
+
+  useEffect(() => {
+    Themes.map(a => {
+      if (a.themeClass) {
+        if (a.themeName === themeState) {
+          document.body.classList.add(a.themeClass)
+          return
+        }
+        document.body.classList.remove(a.themeClass)
+      } 
+    })
+  }, [themeState])
 
 
   return (
@@ -22,6 +36,27 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`h-full p-10`}>
+        <div className={`mb-10`}>
+        <h2>Theme</h2>
+          {Themes.map(theme => {
+            return (
+              <>
+              <div className='flex'>
+                        <input 
+                        onChange={() => {
+                          setThemeState(theme.themeName)
+                        }}
+                        type="checkbox" 
+                        name="" id="" 
+                        checked={theme.themeName === themeState} />
+                        <div className='ml-2 capitalize'>
+                          {String(theme.themeName)}
+                        </div>
+                      </div>
+              </>
+            )
+          })}
+        </div>
         <div className={`h-full`}>
           <Button 
           {...buttonState}

@@ -50,12 +50,14 @@ const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
       ref={mergeRefs([ref, buttonRef])}
       className={
         classNames({
-          "bg-green-500 text-white hover:bg-green-600": intent === "primary",
-          "bg-white text-black hover:bg-gray-200": intent === "secondary"
+          "bg-primary enabled:hover:bg-primary-hover": intent === "primary",
+          "bg-secondary enabled:hover:bg-secondary-hover": intent === "secondary"
         }, {
           "opacity-50": isDisabled
         },
-          `inline-flex 
+        `inline-flex 
+        transition-all
+        duration-300
         px-10 
         rounded-sm 
         leading-6  
