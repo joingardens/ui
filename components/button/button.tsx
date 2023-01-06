@@ -53,7 +53,9 @@ const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
           "bg-primary enabled:hover:bg-primary-hover": intent === "primary",
           "bg-secondary enabled:hover:bg-secondary-hover": intent === "secondary"
         }, {
-          "opacity-50": isDisabled
+          "opacity-50": isDisabled,
+          "cursor-not-allowed": disabled,
+          "cursor-wait": loading
         },
         `inline-flex 
         transition-all

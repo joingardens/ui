@@ -35,7 +35,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`h-full p-10`}>
+      <main className={`p-10`}>
         <div className={`mb-10`}>
         <h2>Theme</h2>
           {Themes.map(theme => {
@@ -57,7 +57,7 @@ export default function Home() {
             )
           })}
         </div>
-        <div className={`h-full`}>
+        <div className={``}>
           <Button 
           {...buttonState}
           >
@@ -111,10 +111,6 @@ export default function Home() {
             })}
 
           </div>
-        </div>
-
-        <div className={`h-full`}>
-
         </div>
       </main>
     </>
