@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useRef } from 'react';
-import LoadingDots from '../loading-dots/LoadingDots';
-import { mergeRefs } from '../../utils/mergeRefs';
 import classNames from '../../utils/classnames';
+import { mergeRefs } from '../../utils/mergeRefs';
+import LoadingDots from '../loading-dots/LoadingDots';
 
 
 export const ButtonVariants = {
@@ -26,7 +26,7 @@ export type VariantsToProps<T> = {
 }
 
 
-export interface LowLevelButtonProps extends React.PropsWithChildren, VariantsToProps<typeof ButtonVariants> {
+export interface LowLevelButtonProps extends React.PropsWithChildren<any>, VariantsToProps<typeof ButtonVariants> {
   style?: HTMLAttributes<HTMLButtonElement>["style"],
   /** Use for width */
   className?: string
@@ -57,7 +57,7 @@ const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
           "cursor-not-allowed": disabled,
           "cursor-wait": loading
         },
-        `inline-flex 
+          `inline-flex 
         transition-all
         duration-300
         px-10 
