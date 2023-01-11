@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react'
-import Button, { ButtonVariants, LowLevelButtonProps } from '../components/button/button'
+import { Button, ButtonVariants, LowLevelButtonProps } from '../components/button/button'
 import { Theme, Themes } from '../config/theme.config'
 
 
@@ -53,6 +53,7 @@ export default function Home() {
         </div>
         <div className={``}>
           <Button
+
             {...buttonState}
           >
             Hello!

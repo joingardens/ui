@@ -1,6 +1,5 @@
-import React, { forwardRef, HTMLAttributes, useRef } from 'react';
+import React, { HTMLAttributes } from 'react';
 import classNames from '../../utils/classnames';
-import { mergeRefs } from '../../utils/mergeRefs';
 import LoadingDots from '../loading-dots/LoadingDots';
 
 
@@ -26,28 +25,30 @@ export type VariantsToProps<T> = {
 }
 
 
-export interface LowLevelButtonProps extends React.PropsWithChildren<any>, VariantsToProps<typeof ButtonVariants> {
+export interface LowLevelButtonProps extends
+  React.PropsWithChildren<VariantsToProps<typeof ButtonVariants>>,
+  Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+  keyof VariantsToProps<typeof ButtonVariants>> {
   style?: HTMLAttributes<HTMLButtonElement>["style"],
   /** Use for width */
   className?: string
 }
 
-const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
+export const Button: React.FC<LowLevelButtonProps> = (props) => {
   const {
     children,
     loading = false,
     disabled = false,
     style,
     intent,
-    className
+    className,
+    ...rest
   } = props;
-  const ref = useRef(null);
 
   const isDisabled = loading ? loading : disabled
 
   return (
     <button
-      ref={mergeRefs([ref, buttonRef])}
       className={
         classNames({
           "bg-primary enabled:hover:bg-primary-hover": intent === "primary",
@@ -73,6 +74,7 @@ const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
       style={{
         ...style
       }}
+      {...rest}
     >
       {!loading && children}
       {loading && (
@@ -82,8 +84,7 @@ const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
       )}
     </button>
   );
-});
+};
 
 Button.displayName = "Button"
 
-export default Button;
