@@ -78,7 +78,7 @@ export default function Home() {
                           [transformedA]: e.target.value,
                         })
                       }}
-                      type="text" value={buttonState[transformedA]} />
+                      type="text" className='' value={buttonState[transformedA]} />
                     </div>
                   </div>
                 )

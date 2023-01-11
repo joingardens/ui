@@ -16,20 +16,21 @@ export const ButtonVariants = {
   loading: {
     TRUE: true,
     FALSE: false
-  }
+  },
+  className: "string"
 } as const
 
 export type ObjectValues<T> = T[keyof T]
 
 export type VariantsToProps<T> = {
-  [R in keyof T]: ObjectValues<T[R]>
+  [R in keyof T]: T[R] extends string ? string : T[R] extends Object ? ObjectValues<T[R]> : never
 }
 
 
 export interface LowLevelButtonProps extends React.PropsWithChildren, VariantsToProps<typeof ButtonVariants> {
   style?: HTMLAttributes<HTMLButtonElement>["style"],
   /** Use for width */
-  className?: string
+
 }
 
 const Button = forwardRef<unknown, LowLevelButtonProps>((props, buttonRef) => {
